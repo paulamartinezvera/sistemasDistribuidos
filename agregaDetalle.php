@@ -1,5 +1,4 @@
 <?php
-
     $id = $_POST['id'];
     $producto = $_POST['producto'];
     $cantidad = $_POST['cantidad'];
@@ -13,7 +12,6 @@
         $user,
         $pass
     );
-        
     if($con->connect_error){
         die("Conexion fallida ".$con->connect_error);
     }
