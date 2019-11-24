@@ -15,7 +15,6 @@ $(document).ready(function () {
                 success: function (result) {
                     console.log("RESULT " + result);
                 }
-
             });
             $("#referencia").val('');
             $("#vendedor").val('');
@@ -41,7 +40,6 @@ $(document).ready(function () {
                 success: function (result) {
                     console.log("RESULT " + result);
                 }
-
             });
             $("#id").val('');
             $("#producto").val('');

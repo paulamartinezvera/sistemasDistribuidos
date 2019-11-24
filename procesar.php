@@ -60,6 +60,4 @@
         echo "Se inserto el registro correctamente"."<br>";
     }
     mysqli_close($con);
-    mysqli_close($con);
-
 ?>
