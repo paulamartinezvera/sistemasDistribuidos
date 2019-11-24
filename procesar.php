@@ -8,11 +8,7 @@
     echo $referencia;
     echo $vendedor;
     echo $fecha;
-//     $id = $_GET['id'];
-//     $producto = $_GET['producto'];
-//     $cantidad = $_GET['cantidad'];
-//     $precio = $_GET['precio'];
-//     $total = $_GET['total'];
+
     
 //     if(empty($referencia)||empty($vendedor)||empty($fecha)){
 //         echo "Alguno de los campos esta vacio";
@@ -45,15 +41,15 @@
         Fecha DATETIME not null,
         primary key(FactNum)
     );";
-//     $creaTabla2 ="CREATE TABLE IF NOT EXISTS Detalle(
-//         Id int(11) not null,
-//         Producto varchar(50) not null,
-//         Cantidad int(11) not null,
-//         Preciou decimal not null,
-//         Total DECIMAL not null,
-//         FactNum  int(11) NOT NULL,
-//         FOREIGN KEY (FactNum) REFERENCES Maestro (FactNum)         
-//     );";
+    $creaTabla2 ="CREATE TABLE IF NOT EXISTS Detalle(
+        Id int(11) not null,
+        Producto varchar(50) not null,
+        Cantidad int(11) not null,
+        Preciou decimal not null,
+        Total DECIMAL not null,
+        FactNum  int(11) NOT NULL,
+        FOREIGN KEY (FactNum) REFERENCES Maestro (FactNum)         
+    );";
     $usarBD="USE nuevaDB;";
     if($con->query($usarBD)===true){
         echo "La base de datos todolistDB se usa correctamente"."<br>";
@@ -65,16 +61,17 @@
     }else{
         die("Error al crear tabla: ".$con->error."<br>");
     }
-//     if($con->query($creaTabla2)===true){
-//         echo "La tabla 2 se creo correctamente"."<br>";
-//     }else{
-//         die("Error al crear tabla: ".$con->error."<br>");
-//     }
+    if($con->query($creaTabla2)===true){
+        echo "La tabla 2 se creo correctamente"."<br>";
+    }else{
+        die("Error al crear tabla: ".$con->error."<br>");
+    }
 
     $insertar="INSERT INTO Maestro (Referencia,Vendedor,Fecha) VALUES ('$referencia','$vendedor','$fecha')";
     if($con->query($insertar)===true){
         echo "Se inserto el registro correctamente"."<br>";
     }
+    mysqli_close($con);
 //         
 //         $consultaUsuario="SELECT * FROM Maestro WHERE Referencia='$referencia' AND Vendedor='$vendedor' AND Fecha='$fecha'";
 // $result=$con->query($consultaUsuario);
@@ -101,7 +98,6 @@
 //     // }else{
 //     //     die("Error al insertar el registro"."<br>");
 //     // }
-//     mysqli_close($con);
+    mysqli_close($con);
 // }
-
 ?>
