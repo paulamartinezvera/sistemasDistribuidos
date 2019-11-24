@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="scriptjquery.js"></script>
+</head>
+
+<body>
+    <h2>Factura y detalle</h2>
+    <form action="procesar.php" method="GET">
+        <p>
+            Referencia: <input type="text" name="referencia">
+        </p>
+        <p>
+            Vendedor: <input type="text" name="vendedor">
+        </p>
+        <p>
+            Fecha: <input type="date" name="fecha">
+        </p>
+        <p>Detalle</p>
+        <p>Id Detalle <input type="text" name="id"></p>
+        <p>Producto <input type="text" name="producto"></p>
+        <p>Cantidad <input type="text" name="cantidad"></p>
+        <p>Preciou <input type="text" name="precio"></p>
+        <p>Total <input type="text" name="total"></p>
+        
+        
+        <p>
+            <input type="submit" value="Enviar" id="enviarForm">
+            
+        </p>
+    </form>
+    <form action="agregaOtro.php" method="GET">
+        <input type="submit" value="Agregar Otro Detalle" id="agregarDetalle">
+    </form>
+
+
+
+
+    <h2>Consulta usuarios creados</h2>
+    <form action="consultar.php" method="GET">
+        <p>
+            Usuario: <input type="text" name="usuario">
+        </p>
+        <p>
+            <input type="submit" value="Enviar">
+        </p>
+    </form>
+</body>
+
+</html>
