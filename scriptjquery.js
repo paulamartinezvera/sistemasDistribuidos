@@ -1,15 +1,23 @@
-$(document).ready(function(){
-    $("#enviarForm").click(function(){
-        alert("boton presionado");
-        var cualquiera=$('[name="referencia"]').val();
-        alert(cualquiera);
-        $.ajax({
-            type:'GET',
-            url:'procesar.php',
-            data:'referencia='+$('[name="referencia"]').val(),
-            success:function(msg){
-                console.log("mensaje "+msg);
+$(document).ready(function() {
+    $('#submit').click(function() {
+        var referencia=$("#referencia").val();
+        var vendedor=$("#vendedor").val();
+        var fecha=$("#fecha").val();
+        var dataString='referencia='+referencia+'&vendedor='+vendedor+'&fecha='+fecha;
+        if(referencia==''|| vendedor=='' || fecha==''){
+            $("#display").html("Por favor llene todos los campos");
+        }else{
+                $.ajax({
+            type: "POST",
+            url: 'procesar.php',
+            data: dataString,
+            cache:false,
+            success:function(result){
+                console.log("RESULT "+result);
             }
-        });
-    });
+
+       });
+        }
+    return false;
+     });
 });
