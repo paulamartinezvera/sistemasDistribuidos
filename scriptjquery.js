@@ -15,7 +15,7 @@ $(document).ready(function () {
         var precio = $("#precio").val();
         var total = $("#total").val();
 
-        if (referencia == '' || vendedor == '' || fecha == '' || producto == '' || cantidad == '' || precio == '' || total == '') {
+        if (referencia == '' || vendedor == '' || fecha == '') {
             $("#display").html("Por favor llene todos los campos");
         } else {
             console.log("CAMBIA ES "+cambia);
@@ -30,39 +30,7 @@ $(document).ready(function () {
                         console.log("RESULT " + result);
                     }
                 });
-                setTimeout($.ajax({
-                    type: "POST",
-                    url: 'traeIdFactura.php',
-                    data: dataString,
-                    cache: false,
-                    success: function (result) {
-    
-                        console.log("RESULT " + result);
-                        var indice = result.indexOf(":");
-                        var idFactura = result.substring(indice + 1, result.length);
-                        console.log("indice" + indice);
-                        console.log("numeroFactura" + idFactura);
-                        var dataString2 = 'producto=' + producto + '&cantidad=' + cantidad + '&precio=' + precio + '&total=' + total + '&idFactura=' + idFactura;
-                        $.ajax({
-                            type: "POST",
-                            url: 'agregaDetalle.php',
-                            data: dataString2,
-                            cache: false,
-                            success: function (result) {
-                                console.log("RESULT " + result);
-                            }
-                        });
-                    }
-                }), 6000);
                 
-                // $.get("procesar.php", function(data){
-                //     console.log("GET PROCESAR.PHP"+data);
-                // });
-    
-                $("#producto").val('');
-                $("#cantidad").val('');
-                $("#precio").val('');
-                $("#total").val('');
                 // contador++
             }else if(contador>1){
                 console.log("contador es mayor que 1");
@@ -118,7 +86,44 @@ $(document).ready(function () {
     // });
 
     $("#agregarDetalleButton").click(() => {
-        $("#detalle").css('visibility', 'visible');
+        if(producto == '' || cantidad == '' || precio == '' || total == ''){
+            $("#display").html("Por favor llene todos los campos");
+        }else{
+            setTimeout($.ajax({
+                type: "POST",
+                url: 'traeIdFactura.php',
+                data: dataString,
+                cache: false,
+                success: function (result) {
+        
+                    console.log("RESULT " + result);
+                    var indice = result.indexOf(":");
+                    var idFactura = result.substring(indice + 1, result.length);
+                    console.log("indice" + indice);
+                    console.log("numeroFactura" + idFactura);
+                    var dataString2 = 'producto=' + producto + '&cantidad=' + cantidad + '&precio=' + precio + '&total=' + total + '&idFactura=' + idFactura;
+                    $.ajax({
+                        type: "POST",
+                        url: 'agregaDetalle.php',
+                        data: dataString2,
+                        cache: false,
+                        success: function (result) {
+                            console.log("RESULT " + result);
+                        }
+                    });
+                }
+            }), 10000);
+            
+            // $.get("procesar.php", function(data){
+            //     console.log("GET PROCESAR.PHP"+data);
+            // });
+        
+            $("#producto").val('');
+            $("#cantidad").val('');
+            $("#precio").val('');
+            $("#total").val('');
+        }
+     
     });
     $("#referencia").change(() => {
         var nuevoValor = $("#referencia").val();
@@ -128,6 +133,13 @@ $(document).ready(function () {
         }
     });
     $("#limpiarFactura").click(()=>{
-
+        $("#referencia").val('');
+        $("#vendedor").val('');
+        $("#fecha").val('');
+        console.log("CONTADOR DESDE LIMPIAR" +contador);
+        contador=0;
     });
+    function cualquiera(){
+      
+    }
 });
