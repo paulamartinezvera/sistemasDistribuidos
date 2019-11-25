@@ -10,18 +10,18 @@ $con = new mysqli(
 if($con->connect_error){
     // die("Conexion fallida ".$con->connect_error);
 }
-$sql="USE nuevaDB";
+$sql="USE sistemasDistribuidos";
 if($con->query($sql)===true){
     // echo "base de  datos creada correctamente"."<br>";
 }else{
     // die("Error al crear base de datos ".$con->error."<br>");
 }
-$consultaUsuario="SELECT * FROM Maestro JOIN Detalle;";
+$consultaUsuario="SELECT * FROM Maestro JOIN Detalle ON maestro.FactNum=detalle.FactNum;";
 $result=$con->query($consultaUsuario);
 
     if($result->num_rows>0){
     while($row=$result->fetch_assoc()){
-       echo $row["Vendedor"]."|";
+       echo $row["Preciou"]."|";
     //    echo "id: ".$row["Vendedor"];
        //echo $row["usuario"];    
 

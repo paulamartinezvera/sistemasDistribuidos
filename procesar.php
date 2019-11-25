@@ -15,13 +15,13 @@
         $pass
     );
     if($con->connect_error){
-        die("Conexion fallida ".$con->connect_error);
+        // die("Conexion fallida ".$con->connect_error);
     }
-    $sql="CREATE DATABASE IF NOT EXISTS nuevaDB";
+    $sql="CREATE DATABASE IF NOT EXISTS sistemasDistribuidos";
     if($con->query($sql)===true){
-        echo "base de  datos creada correctamente"."<br>";
+        // echo "base de  datos creada correctamente"."<br>";
     }else{
-        die("Error al crear base de datos ".$con->error."<br>");
+        // die("Error al crear base de datos ".$con->error."<br>");
     }
     $creaTabla="CREATE TABLE IF NOT EXISTS Maestro(
         FactNum int(11) not null auto_increment,
@@ -31,33 +31,35 @@
         primary key(FactNum)
     );";
     $creaTabla2 ="CREATE TABLE IF NOT EXISTS Detalle(
-        Id int(11) not null,
+        Id int(11) not null auto_increment,
         Producto varchar(50) not null,
         Cantidad int(11) not null,
         Preciou decimal not null,
         Total DECIMAL not null,
         FactNum  int(11) NOT NULL,
+        primary key(Id),
         FOREIGN KEY (FactNum) REFERENCES Maestro (FactNum)         
     );";
-    $usarBD="USE nuevaDB;";
+    $usarBD="USE sistemasDistribuidos;";
     if($con->query($usarBD)===true){
-        echo "La base de datos todolistDB se usa correctamente"."<br>";
+        // echo "La base de datos todolistDB se usa correctamente"."<br>";
     }else{
-        die("Error al usar la base de datos todolistDB: ".$con->error."<br>");
+        // die("Error al usar la base de datos todolistDB: ".$con->error."<br>");
     }
     if($con->query($creaTabla)===true){
-        echo "La tabla se creo correctamente"."<br>";
+        // echo "La tabla se creo correctamente"."<br>";
     }else{
-        die("Error al crear tabla: ".$con->error."<br>");
+        // die("Error al crear tabla: ".$con->error."<br>");
     }
     if($con->query($creaTabla2)===true){
-        echo "La tabla 2 se creo correctamente"."<br>";
+        // echo "La tabla 2 se creo correctamente"."<br>";
     }else{
-        die("Error al crear tabla: ".$con->error."<br>");
+        // die("Error al crear tabla: ".$con->error."<br>");
     }
     $insertar="INSERT INTO Maestro (Referencia,Vendedor,Fecha) VALUES ('$referencia','$vendedor','$fecha')";
     if($con->query($insertar)===true){
-        echo "Se inserto el registro correctamente"."<br>";
+        // echo "Se inserto el registro correctamente"."<br>";
+      
     }
     mysqli_close($con);
 ?>
