@@ -9,7 +9,7 @@ $(document).ready(function () {
         var referencia = $("#referencia").val();
         var vendedor = $("#vendedor").val();
         var fecha = $("#fecha").val();
-        var dataString = 'referencia=' + referencia + '&vendedor=' + vendedor + '&fecha=' + fecha;
+        let dataStrin = 'referencia=' + referencia + '&vendedor=' + vendedor + '&fecha=' + fecha;
         var producto = $("#producto").val();
         var cantidad = $("#cantidad").val();
         var precio = $("#precio").val();
@@ -24,7 +24,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: 'procesar.php',
-                    data: dataString,
+                    data: dataStrin,
                     cache: false,
                     success: function (result) {
                         console.log("RESULT " + result);
@@ -34,14 +34,15 @@ $(document).ready(function () {
                 // contador++
             }else if(contador>1){
                 console.log("contador es mayor que 1");
+                console.log("contador es mayor que 1"+dataString);
                 $.ajax({
                     type: "POST",
                     url: 'traeIdFactura.php',
-                    data: dataString,
+                    data: dataStrin,
                     cache: false,
                     success: function (result) {
     
-                        console.log("RESULT " + result);
+                        console.log("RESULT DATA STRINBG" + result);
                         var indice = result.indexOf(":");
                         var idFactura = result.substring(indice + 1, result.length);
                         console.log("indice" + indice);
@@ -86,13 +87,18 @@ $(document).ready(function () {
     // });
 
     $("#agregarDetalleButton").click(() => {
+        var referencia = $("#referencia").val();
+        var vendedor = $("#vendedor").val();
+        var fecha = $("#fecha").val();
+        let dataStrin = 'referencia=' + referencia + '&vendedor=' + vendedor + '&fecha=' + fecha;
+
         if(producto == '' || cantidad == '' || precio == '' || total == ''){
             $("#display").html("Por favor llene todos los campos");
         }else{
             setTimeout($.ajax({
                 type: "POST",
                 url: 'traeIdFactura.php',
-                data: dataString,
+                data: dataStrin,
                 cache: false,
                 success: function (result) {
         
